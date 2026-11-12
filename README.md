@@ -1,6 +1,6 @@
 # 🏥 GrashaPhama (Grasha Pharma) - E-Commerce Mobile App for Medicine Delivery
 
-**Grasha Pharma (GrashaPhama)** is a clinical-grade, user-centric mobile application modeled on Kenya's leading online pharmacy (**MYDAWA**) and customized with **Grasha Pharma's official company profile, mission, strengths, and commitments to quality**.
+**Grasha Pharma (GrashaPhama)** is a clinical-grade, user-centric mobile application modeled on Kenya's leading online pharmacy and customized with **Grasha Pharma's official company profile, mission, strengths, and commitments to quality**.
 
 Designed with a high-end **Glossy Blue & White Theme**, real-time **Lipa Na M-Pesa STK Push checkout**, Kenyan health insurance processing, and **Pharmacy and Poisons Board (PPB Kenya)** regulatory compliance.
 
@@ -21,7 +21,7 @@ Designed with a high-end **Glossy Blue & White Theme**, real-time **Lipa Na M-Pe
 
 ---
 
-## 🌟 Key Features (Replicated & Enhanced from MYDAWA)
+## 🌟 Key Features 
 
 ### 1. 📄 Streamlined Prescription Upload (Self-Pay or Insurance)
 - Seamless camera photo capture or PDF upload of doctor's prescription slip.
@@ -67,7 +67,7 @@ Designed with a high-end **Glossy Blue & White Theme**, real-time **Lipa Na M-Pe
   - Add products matching Grasha's 6 dosage forms (Oral solids, effervescent, liquids, creams/ointments, parenterals, specialized).
   - **3 Ways to Add Images**:
     1. 📸 **File Upload**: Direct file chooser / drag-and-drop converting local image files into base64 data URLs via `FileReader`.
-    2. 🌐 **Direct URL**: Input external CDN URLs (such as MYDAWA Azure blob links).
+    2. 🌐 **Direct URL**: Input external CDN URLs (such as Azure blob links).
     3. 💊 **Pharmacy Presets**: 8 quick-click presets (Blister tabs, Syrup bottle, Insulin pen, Ointment tube, Diagnostics, etc.).
 
 ### 9. 💬 24/7 Live Pharmacist Consultation & WhatsApp Chatbot
