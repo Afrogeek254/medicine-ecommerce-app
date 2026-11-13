@@ -1,0 +1,16 @@
+{
+  "name": "grashapharma-mobile-ecommerce",
+  "version": "1.0.0",
+  "description": "Grasha Pharma E-Commerce Mobile App with MySQL Database, Google Maps Tracking & Google Sign-In",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "node server/server.js",
+    "db:setup": "node server/setup-db.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7"
+  }
+}
