@@ -1,6 +1,10 @@
 # 💊 GrashaPhama (Grasha Pharma) - E-Commerce Mobile App for Medicine Delivery
 
+<<<<<<< HEAD
 **Grasha Pharma (GrashaPhama)** is a clinical-grade, user-centric mobile web application modeled on Kenya's leading online pharmacy (**MYDAWA**) and customized with **Grasha Pharma's official company profile, mission, strengths, and commitments to quality**.
+=======
+**Grasha Pharma (GrashaPhama)** is a clinical-grade, user-centric mobile application modeled on Kenya's leading online pharmacy and customized with **Grasha Pharma's official company profile, mission, strengths, and commitments to quality**.
+>>>>>>> bda9dc95918c9581b537bf9ddfd9da67f354e262
 
 Designed with an **Ultra-Glossy Blue & White Glassmorphism Theme**, **Google Maps Order Tracking with Live GPS**, **Google Account / Gmail Authentication**, **Full MySQL Database Backend**, and **Lipa Na M-Pesa Online STK Push Checkout**.
 
@@ -16,7 +20,11 @@ Regulated by the **Pharmacy and Poisons Board (PPB Kenya)** and registered under
 
 ---
 
+<<<<<<< HEAD
 ## 👤 Uncrowded, Role-Strict Avatar Header
+=======
+## 🌟 Key Features 
+>>>>>>> bda9dc95918c9581b537bf9ddfd9da67f354e262
 
 ### 1. Patient Profile Header
 - **Left**: **Patient Avatar + Patient Name** (e.g. `👩 Jane Wambui`). Clean, spacious, and readable. Clicking navigates directly to the Patient Account & Features.
@@ -32,9 +40,52 @@ Regulated by the **Pharmacy and Poisons Board (PPB Kenya)** and registered under
   4. **WhatsApp Bot** (💬 Customer Support Desk)
 - **No View Phone/Tablet Toggle** or manual role switch.
 
+<<<<<<< HEAD
 ### 3. Guest Profile Header
 - **Left**: Brand Logo (`💊 GrashaPhama`) with `🇰🇪 PPB #3912` regulatory badge.
 - **Right**: Glossy `Sign In` button.
+=======
+### 3. 💡 Generic Medicine Alternative Switcher (Save 40% – 70%)
+- Promotes Grasha Pharma's ethos of affordable healthcare by offering 1-click swaps from expensive brand names to FDA/PPB-approved generic molecules with identical active pharmaceutical ingredients (API) and potency.
+
+### 4. ⚠️ Clinical Drug-to-Drug Interaction Engine
+- Real-time cart safety checker detecting hazardous combinations (e.g., **Hedex + Brufen** flagging NSAID overdose risk).
+
+### 5. ❄️ Cold-Chain Continuous Telemetry (2°C – 8°C)
+- Temperature-sensitive biologics and insulins (such as **Lantus SoloStar**) are packed in certified isothermal cooler boxes with live sensor telemetry displayed on the tracking screen (**4.1°C**).
+
+### 6. 🛵 Dual-Tier Kenyan Logistics Tracking
+- **Nairobi County (Own Grasha Fleet)**: 2 to 4-hour express delivery. **FREE delivery** on orders above KES 2,500.
+- **Major Cities Across Kenya (G4S / Fargo Courier)**: 24-hour delivery to Mombasa, Kisumu, Nakuru, Eldoret, Thika, Nyeri, etc.
+
+### 7. 🔑 User Login & Role Switching
+- **Patient/Customer Account**: Jane Wambui Kamau (`jane.wambui@gmail.com` / `password123`) with prescription archive, saved Nairobi delivery address, and M-Pesa phone number.
+- **Admin / Chief Pharmacist Account**: Pharm. Angela Muthoni (`admin@grashapharma.co.ke` / `admin123`) with access to the Operations Portal.
+- **1-Click Role Switcher**: Tap **"⚡ Switch Role (Admin / Patient)"** in the top presentation toolbar or the account drawer to instantly toggle modes.
+
+### 8. 🛡️ GrashaPharma Admin Operations Portal
+- **Sales & Revenue Monitoring**:
+  - Live KPI dashboard tracking **Total Revenue in KSh**, total orders, average order value (AOV), and inventory capital valuation ($\sum \text{price} \times \text{stock}$).
+  - Payment channel breakdown (Lipa Na M-Pesa vs Card vs COD).
+  - Recent sales transactions table.
+- **Customer Orders Dispatch**:
+  - View incoming orders with customer name, phone number, delivery address, items, and M-Pesa receipt reference codes (`QK...`).
+  - Interactive status dropdown (*Prescription Verified*, *Dispensed & Verified*, *Out for Express Delivery*, *Delivered*).
+- **Stock & Inventory Management**:
+  - Real-time stock status badges (*In Stock*, *Low Stock < 15*, *Out of Stock*).
+  - Quick inline stock steppers (`-1`, `+1`, `+10` batch restock, and click-to-edit prompt).
+  - Filter inventory by *All*, *Low Stock*, *Out of Stock*, *Cold-Chain ❄️*, or *Rx Only*.
+  - Delete / Remove inventory items with instant store catalog sync.
+- **Add New Medicine with Image Upload**:
+  - Add products matching Grasha's 6 dosage forms (Oral solids, effervescent, liquids, creams/ointments, parenterals, specialized).
+  - **3 Ways to Add Images**:
+    1. 📸 **File Upload**: Direct file chooser / drag-and-drop converting local image files into base64 data URLs via `FileReader`.
+    2. 🌐 **Direct URL**: Input external CDN URLs (such as Azure blob links).
+    3. 💊 **Pharmacy Presets**: 8 quick-click presets (Blister tabs, Syrup bottle, Insulin pen, Ointment tube, Diagnostics, etc.).
+
+### 9. 💬 24/7 Live Pharmacist Consultation & WhatsApp Chatbot
+- Built-in WhatsApp consultation drawer linked to **Pharm. Angela Muthoni, B.Pharm (PPB Reg #3912)** with quick chips and external WhatsApp redirect to `+254 722 840 192`.
+>>>>>>> bda9dc95918c9581b537bf9ddfd9da67f354e262
 
 ---
 
