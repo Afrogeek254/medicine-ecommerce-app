@@ -7,12 +7,10 @@ const mysql = require('mysql2/promise');
 require('dotenv').config({ path: path.join(__dirname, '..', '..', '.env') });
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
+const { resolveConnectionSettings } = require('./db-settings');
+
 const dbConfig = {
-  host: process.env.DB_HOST || '127.0.0.1', // 127.0.0.1 forces TCP connection and avoids Windows socket/GSSAPI fallback
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD !== undefined ? process.env.DB_PASSWORD : 'root',
-  database: process.env.DB_NAME || 'grasha_pharma_db',
-  port: parseInt(process.env.DB_PORT || '3306', 10),
+  ...resolveConnectionSettings(),
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
@@ -34,4 +32,4 @@ async function testConnection() {
   }
 }
 
-module.exports = { pool, dbConfig, testConnection };
+module.exports = { pool, dbConfig, testConnection, resolveConnectionSettings };

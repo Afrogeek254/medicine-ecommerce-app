@@ -11,12 +11,9 @@ require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 async function setupDatabase() {
-  // Use 127.0.0.1 by default on Windows to force TCP connection (bypasses Windows GSSAPI/Named Pipe mapping)
-  const host = process.env.DB_HOST || '127.0.0.1';
-  const user = process.env.DB_USER || 'root';
-  const password = process.env.DB_PASSWORD !== undefined ? process.env.DB_PASSWORD : 'root';
-  const port = parseInt(process.env.DB_PORT || '3306', 10);
-  const databaseName = process.env.DB_NAME || 'grasha_pharma_db';
+  // Shares connection resolution with the server (supports MYSQL_URL / DATABASE_URL, e.g. Railway)
+  const { resolveConnectionSettings } = require('./config/db-settings');
+  const { host, user, password, port, database: databaseName } = resolveConnectionSettings();
 
   console.log(`[Setup] Connecting to MySQL host at ${host}:${port} as '${user}' with configured password...`);
 
