@@ -1,162 +1,115 @@
-# 💊 GrashaPhama (Grasha Pharma) - E-Commerce Mobile App for Medicine Delivery
+# 💊 Grasha Pharma — Clinical Web App, Pharmacy POS & E-Commerce Platform
 
-<<<<<<< HEAD
-**Grasha Pharma (GrashaPhama)** is a clinical-grade, user-centric mobile web application modeled on Kenya's leading online pharmacy (**MYDAWA**) and customized with **Grasha Pharma's official company profile, mission, strengths, and commitments to quality**.
-=======
-**Grasha Pharma (GrashaPhama)** is a clinical-grade, user-centric mobile application modeled on Kenya's leading online pharmacy and customized with **Grasha Pharma's official company profile, mission, strengths, and commitments to quality**.
->>>>>>> bda9dc95918c9581b537bf9ddfd9da67f354e262
+**Grasha Pharma (GrashaPhama)** is a modern, responsive web application and Point-of-Sale (POS) platform modeled on Kenya's leading clinical pharmacy services and customized with **Grasha Pharma's official company profile, mission, strengths, and commitments to quality**.
 
-Designed with an **Ultra-Glossy Blue & White Glassmorphism Theme**, **Google Maps Order Tracking with Live GPS**, **Google Account / Gmail Authentication**, **Full MySQL Database Backend**, and **Lipa Na M-Pesa Online STK Push Checkout**.
+Designed with an **Ultra-Glossy Blue & White Glassmorphism Theme**, a **Web-Based Pharmacy POS with Kenyan KRA eTIMS Tax Invoices**, **Daily Sales Report Generator**, **Google Maps Order Tracking with Live GPS**, **Google Account / Gmail & MySQL Authentication**, and **Lipa Na M-Pesa Online STK Push Checkout**.
 
 Regulated by the **Pharmacy and Poisons Board (PPB Kenya)** and registered under the **Companies Act of Kenya (CAP. 499, section 14 (2))**.
 
 ---
 
-## 📱 Mobile-First App Design (No Phone Bezels or Mockup Lines)
+## 🌟 Key Upgrades & Highlights
 
-- **Edge-to-Edge Mobile Layout**: Simulated phone borders, frames, and fake hardware notches have been completely removed.
-- **Responsive Architecture**: Runs full-screen on mobile devices and clean, centered responsive container (up to 480px) on desktop screens with smooth ambient backdrops.
-- **Ultra-Glossy Aesthetic**: Frosted glassmorphism (`backdrop-filter: blur(24px)`), specular light reflections (`box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.85)`), and smooth tactile micro-animations.
+### 1. 🌐 Fully Responsive Web App & Glossy UI
+- **Responsive Across Screens**: Native desktop widescreen experience (1200px+) with top navigation and desktop search bar, adapted seamlessly for tablets and mobile handhelds with a persistent quick-access bottom nav.
+- **Glassmorphism Theme**: Royal blue (`#0284c7`, `#0369a1`) & pure ice-white aesthetic with `backdrop-filter: blur(24px)`, subtle specular borders, and micro-interactions.
+- **Patient vs Admin Segregation**: Clean separation between customer patient shopping experience and pharmacist administrative controls.
 
----
+### 2. 🧾 Pharmacy POS (Point of Sale) with Kenyan KRA eTIMS
+- **Fast Cashier Terminal**:
+  - Live search by medicine name, brand, or barcode.
+  - Category filtering (All, Prescriptions, Cold-Chain, Chronic, Diagnostics, Wellness).
+  - 1-click add to active sale ticket with quantity adjustments and stock limits.
+  - Multi-payment support: **Lipa Na M-Pesa**, **Cash**, and **Credit/Debit Card**.
+- **Kenya Revenue Authority (KRA) eTIMS Compliance**:
+  - Distinguishes **Tax Exempt (Code E - Human Medicines)** under the Kenya VAT Act (0% VAT) from **Taxable Standard (Code A - Diagnostics/Supplements - 16% VAT)**.
+  - Automatically generates **Fiscal Tax Invoices** with Pharmacy KRA PIN (`P051289120Z`), Control Unit (CU) Serial (`KRAMW0921804`), eTIMS Invoice Number, and SCDC signatures.
+  - **Thermal Receipt Printing**: Printable 80mm receipt with QR code linking directly to KRA's eTIMS fiscal verification portal.
 
-<<<<<<< HEAD
-## 👤 Uncrowded, Role-Strict Avatar Header
-=======
-## 🌟 Key Features 
->>>>>>> bda9dc95918c9581b537bf9ddfd9da67f354e262
+### 3. 📊 Daily Sales & Financial Report Generator
+- Calculates real-time daily metrics:
+  - Total Daily Gross Revenue in KSh.
+  - Completed Transaction Count.
+  - Payment channel breakdown: **Lipa Na M-Pesa**, **Cash**, and **Card**.
+  - Tax breakdown: Total VAT Exempt sales vs VAT 16% Collected.
+  - Top-selling medicines and velocity ranking.
+- **1-Click Printable Audit Report**: Formatted for management and end-of-day cash reconciliation.
 
-### 1. Patient Profile Header
-- **Left**: **Patient Avatar + Patient Name** (e.g. `👩 Jane Wambui`). Clean, spacious, and readable. Clicking navigates directly to the Patient Account & Features.
-- **Right**: Sleek Cart button with real-time item counter badge.
-- **No Clutter**: Role switch buttons, WhatsApp icons, and squeezed location subtitles have been removed from the patient header avatar area.
+### 4. 📦 Stock & Inventory Control with Image Upload
+- Real-time stock status badges (*In Stock*, *Low Stock < 15*, *Out of Stock*).
+- Quick inline stock adjustments (`-5`, `+10` batch restock).
+- **Add New Medicine Modal**:
+  - Photo file picker reading Base64 image data URLs directly from device/computer.
+  - Image URL support for cloud storage links.
+  - Form validation for Dosage Form, Strength, Unit Price, Regulatory Classification, and Initial Stock.
 
-### 2. Admin Profile Header
-- **Left**: **Admin Avatar + Admin Name** (e.g. `🛡️ Pharm. Angela`). Clicking opens the Admin Operations Portal.
-- **Right**: Exactly four essential controls:
-  1. **Sales** (📊 Sales Analytics)
-  2. **Stocks** (📦 Medicine Stock Management)
-  3. **Admin Name** (Avatar pill)
-  4. **WhatsApp Bot** (💬 Customer Support Desk)
-- **No View Phone/Tablet Toggle** or manual role switch.
+### 5. 🔐 Real Database Credentials & Google Sign-In
+- **Real MySQL Authentication**: Secure login against credentials stored in the `users` table:
+  - **Demo Patient**: `jane.wambui@gmail.com` / `password123`
+  - **Demo Admin**: `admin@grashapharma.co.ke` / `admin123`
+- **Google Sign-In**: Integration with Google Identity Services (GIS) / Gmail OAuth.
+- **Login Guard**: Prompt unauthenticated users before order placement while preserving cart contents.
 
-<<<<<<< HEAD
-### 3. Guest Profile Header
-- **Left**: Brand Logo (`💊 GrashaPhama`) with `🇰🇪 PPB #3912` regulatory badge.
-- **Right**: Glossy `Sign In` button.
-=======
-### 3. 💡 Generic Medicine Alternative Switcher (Save 40% – 70%)
-- Promotes Grasha Pharma's ethos of affordable healthcare by offering 1-click swaps from expensive brand names to FDA/PPB-approved generic molecules with identical active pharmaceutical ingredients (API) and potency.
+### 6. 📱 Lipa Na M-Pesa Daraja STK Push Integration
+- Built-in simulator and API proxy for Safaricom Daraja STK Push (LNMO - Lipa Na M-Pesa Online).
+- Dedicated architecture guide and interactive testing modal under the `#mpesa` route.
 
-### 4. ⚠️ Clinical Drug-to-Drug Interaction Engine
-- Real-time cart safety checker detecting hazardous combinations (e.g., **Hedex + Brufen** flagging NSAID overdose risk).
-
-### 5. ❄️ Cold-Chain Continuous Telemetry (2°C – 8°C)
-- Temperature-sensitive biologics and insulins (such as **Lantus SoloStar**) are packed in certified isothermal cooler boxes with live sensor telemetry displayed on the tracking screen (**4.1°C**).
-
-### 6. 🛵 Dual-Tier Kenyan Logistics Tracking
-- **Nairobi County (Own Grasha Fleet)**: 2 to 4-hour express delivery. **FREE delivery** on orders above KES 2,500.
-- **Major Cities Across Kenya (G4S / Fargo Courier)**: 24-hour delivery to Mombasa, Kisumu, Nakuru, Eldoret, Thika, Nyeri, etc.
-
-### 7. 🔑 User Login & Role Switching
-- **Patient/Customer Account**: Jane Wambui Kamau (`jane.wambui@gmail.com` / `password123`) with prescription archive, saved Nairobi delivery address, and M-Pesa phone number.
-- **Admin / Chief Pharmacist Account**: Pharm. Angela Muthoni (`admin@grashapharma.co.ke` / `admin123`) with access to the Operations Portal.
-- **1-Click Role Switcher**: Tap **"⚡ Switch Role (Admin / Patient)"** in the top presentation toolbar or the account drawer to instantly toggle modes.
-
-### 8. 🛡️ GrashaPharma Admin Operations Portal
-- **Sales & Revenue Monitoring**:
-  - Live KPI dashboard tracking **Total Revenue in KSh**, total orders, average order value (AOV), and inventory capital valuation ($\sum \text{price} \times \text{stock}$).
-  - Payment channel breakdown (Lipa Na M-Pesa vs Card vs COD).
-  - Recent sales transactions table.
-- **Customer Orders Dispatch**:
-  - View incoming orders with customer name, phone number, delivery address, items, and M-Pesa receipt reference codes (`QK...`).
-  - Interactive status dropdown (*Prescription Verified*, *Dispensed & Verified*, *Out for Express Delivery*, *Delivered*).
-- **Stock & Inventory Management**:
-  - Real-time stock status badges (*In Stock*, *Low Stock < 15*, *Out of Stock*).
-  - Quick inline stock steppers (`-1`, `+1`, `+10` batch restock, and click-to-edit prompt).
-  - Filter inventory by *All*, *Low Stock*, *Out of Stock*, *Cold-Chain ❄️*, or *Rx Only*.
-  - Delete / Remove inventory items with instant store catalog sync.
-- **Add New Medicine with Image Upload**:
-  - Add products matching Grasha's 6 dosage forms (Oral solids, effervescent, liquids, creams/ointments, parenterals, specialized).
-  - **3 Ways to Add Images**:
-    1. 📸 **File Upload**: Direct file chooser / drag-and-drop converting local image files into base64 data URLs via `FileReader`.
-    2. 🌐 **Direct URL**: Input external CDN URLs (such as Azure blob links).
-    3. 💊 **Pharmacy Presets**: 8 quick-click presets (Blister tabs, Syrup bottle, Insulin pen, Ointment tube, Diagnostics, etc.).
-
-### 9. 💬 24/7 Live Pharmacist Consultation & WhatsApp Chatbot
-- Built-in WhatsApp consultation drawer linked to **Pharm. Angela Muthoni, B.Pharm (PPB Reg #3912)** with quick chips and external WhatsApp redirect to `+254 722 840 192`.
->>>>>>> bda9dc95918c9581b537bf9ddfd9da67f354e262
+### 7. 🗺️ Google Maps Live Order Tracking
+- Real-time order dispatching with Google Maps polyline route from Grasha Pharma Central Hub (Upper Hill, Nairobi) to customer address.
+- Cold-Chain IoT temperature monitoring (`3.8°C`, PPB compliant `2°C - 8°C`).
+- Interactive rider actions (Call Rider, WhatsApp, Center View).
 
 ---
 
-## 🔐 Authentication & Checkout Flow
+## 🚀 Quickstart & Local Installation
 
-- **Login Prompt Before Purchase**: When a guest or unauthenticated customer taps to checkout (*Lipa Na M-Pesa*, *Card*, or *Cash on Delivery*), the app prompts them to sign in first.
-- **Google Account / Gmail Authentication**: 1-click **Continue with Google** button supporting Google Identity Services (GIS), custom Gmail sign-in, and instant demo patient login.
-- **Seamless Cart Preservation**: Once signed in, the user is immediately resumed into their selected payment modal (e.g., M-Pesa STK push) with all cart items intact.
-- **Strict Role Defaults**: Logging in as a patient defaults to the patient store; logging in as an admin (`admin@grashapharma.co.ke`) defaults to the Operations Portal.
+### Prerequisites
+- Node.js v18 or newer
+- MySQL Server running on `127.0.0.1:3306` (Credentials: `root` / `root`)
 
----
-
-## 🗺️ Google Maps Live Order Tracking
-
-- **Interactive Google Maps View**:
-  - **Pharmacy Origin Pin**: Grasha Pharma Central Hub, Upper Hill, Nairobi (`-1.2921, 36.8219`)
-  - **Customer Destination Pin**: Westlands, Nairobi (`-1.2644, 36.8030`)
-  - **Delivery Motorcycle Pin**: 🛵 Samuel Ochieng (Grasha Dedicated Fleet, `-1.2780, 36.8120`)
-  - **Delivery Route Polyline**: Smooth delivery route connecting pharmacy hub to customer destination.
-  - **Animated Movement**: Live GPS telemetry advancing towards destination.
-  - **Direct Controls**: Center on Rider, Destination, or Open in Google Maps app for turn-by-turn navigation.
-- **Live ETA Countdown**: Real-time traffic-adjusted arrival estimation (e.g. `~18 mins`).
-- **Cold-Chain IoT Sensor**: Continuous telemetry display for insulins/biologics (e.g. `3.8°C`, PPB compliant `2°C - 8°C`).
-- **Rider Contact**: 1-tap `Call Rider (+254 722 840 192)` and `WhatsApp Rider`.
-
----
-
-## 🗄️ MySQL Database Backend Integration
-
-The app comes with a complete MySQL database layer and REST API:
-
-- **`database/schema.sql`**: Production DDL schema creating:
-  - `users` (Patients, Pharmacist Admins, Google OAuth credentials)
-  - `categories` (Prescriptions, Cold-Chain, Chronic, Diagnostics, Wellness)
-  - `medicines` (Full catalog with KSh prices, stock counts, dosage forms, images)
-  - `prescriptions` (Doctor slips with PPB verification statuses)
-  - `orders` (Orders, M-Pesa receipt codes, GPS coordinates, tracking stages)
-  - `order_items` (Order line items)
-  - `pill_reminders` (Patient chronic dosage schedules)
-  - `admin_logs` (Audit trail)
-- **`database/seed.sql`**: Pre-loaded with Kenyan PPB medicines, Jane Wambui demo patient, Pharm. Angela admin, active orders, and doctor prescriptions.
-- **`server/server.js`**: Express.js REST API with `mysql2/promise` connection pooling.
-- **Admin MySQL Console**: Live database status monitor, table count inspector, and 1-click live SQL dump exporter.
-
-### Starting the MySQL Backend:
+### Setup Commands
 ```bash
-# 1. Install server dependencies
+# 1. Install dependencies
 npm install
 
-# 2. Configure your MySQL credentials in .env (or server/.env.example)
-# DB_HOST=localhost, DB_USER=root, DB_PASSWORD=, DB_NAME=grasha_pharma_db
-
-# 3. Initialize database tables & seed data
+# 2. Run Database Setup (Creates grasha_pharma_db and seeds 8 tables)
 npm run db:setup
 
-# 4. Start API server
+# 3. Start Web App and API Server
 npm start
 ```
-The app runs at `http://localhost:3000` (or directly via `index.html` with offline cache).
+
+### URLs
+- **Main Web App**: [http://localhost:3000](http://localhost:3000)
+- **POS & eTIMS Terminal**: [http://localhost:3000#pos](http://localhost:3000#pos)
+- **Admin Dashboard**: [http://localhost:3000#admin](http://localhost:3000#admin)
+- **Lipa Na M-Pesa Guide**: [http://localhost:3000#mpesa](http://localhost:3000#mpesa)
 
 ---
 
-## 👩‍⚕️ Customer Profile vs Admin Profile
+## ☁️ Cloud Deployment (Supabase, Vercel & Netlify)
 
-| Feature | Customer / Patient Profile | Admin Operations Portal |
+See the comprehensive [DEPLOYMENT_GUIDE.md](file:///c:/Users/mwema/Downloads/medicine-ecommerce-app/DEPLOYMENT_GUIDE.md) for step-by-step instructions:
+- **Supabase**: Cloud database setup, SQL schema execution, Google Auth provider setup.
+- **Vercel**: One-click edge deployment with `vercel.json` and serverless API routing.
+- **Netlify**: Serverless deployment with `netlify.toml`.
+- **Safaricom Daraja**: Paybill 891200, Passkey, and Webhook configuration.
+- **KRA eTIMS**: Fiscal compliance documentation.
+
+---
+
+## 👩‍⚕️ Customer vs Admin Privileges
+
+| Feature | Customer / Patient Profile | Admin Operations & POS Portal |
 | :--- | :--- | :--- |
 | **Identity** | Patient Name & Google Account | Chief Pharmacist & PPB License #3912 |
-| **Orders** | My Orders & Live Google Maps Tracking | Order Management & Status Dispatching |
-| **Prescriptions** | My Doctor Rx Slips & Upload Slip | Rx Review & Approval Queue |
-| **Inventory** | Browse catalog & add to cart | Stock Adjustment, Expiry & Price Control |
-| **Sales** | View my purchase history | Live Revenue, M-Pesa Settlements, Avg Basket |
-| **Database** | Seamless automatic local/cloud sync | MySQL Status Widget & Live SQL Dump Export |
-| **Support** | Consult Pharmacist on WhatsApp | Respond to patient customer service desk |
-| **Sign Out** | Clean Logout button | Clean Logout button |
+| **Catalog** | Interactive clinical store with filters | Medicine catalog management (+/- stock) |
+| **POS Terminal** | *(Hidden from customer)* | Fast cashier terminal with eTIMS receipt |
+| **eTIMS Receipt** | View electronic invoice on completed order | Thermal print & generate KRA fiscal receipt |
+| **Daily Sales** | *(Restricted)* | Revenue, M-Pesa/Cash/Card breakdown & print |
+| **Order Tracking** | Live Google Maps route & cold chain sensor | Order dispatch & status update |
+| **Safety Tools** | Drug interaction check & Generic switcher | Audit logs & stock notifications |
+| **Consultation** | WhatsApp Pharmacist chat drawer | Administrative customer support |
+
+---
+*Licensed by Pharmacy and Poisons Board Kenya (PPB Reg #3912).*
