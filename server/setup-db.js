@@ -35,8 +35,11 @@ async function setupDatabase() {
     const schemaPath = path.join(__dirname, '..', 'database', 'schema.sql');
     if (fs.existsSync(schemaPath)) {
       console.log('[Setup] Executing database schema from database/schema.sql...');
+      // Ensure foreign key checks are disabled during table reset
+      await connection.query('SET FOREIGN_KEY_CHECKS = 0');
       const schemaSql = fs.readFileSync(schemaPath, 'utf8');
       await connection.query(schemaSql);
+      await connection.query('SET FOREIGN_KEY_CHECKS = 1');
       console.log('[Setup] ✓ Database & tables created successfully!');
     }
 

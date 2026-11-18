@@ -2,6 +2,7 @@
 -- Grasha Pharma (GrashaPhama) - Production MySQL Database Schema
 -- Registered under Companies Act of Kenya (CAP. 499, section 14 (2))
 -- Regulated by Pharmacy and Poisons Board (PPB Kenya) | Est. April 2013
+-- Integrated with KRA eTIMS Tax Compliance & Lipa Na M-Pesa (Daraja API)
 -- ====================================================================
 
 CREATE DATABASE IF NOT EXISTS `grasha_pharma_db`
@@ -9,6 +10,18 @@ CREATE DATABASE IF NOT EXISTS `grasha_pharma_db`
   COLLATE utf8mb4_unicode_ci;
 
 USE `grasha_pharma_db`;
+
+-- Drop existing tables to ensure complete schema synchronization and avoid column mismatches
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `admin_logs`;
+DROP TABLE IF EXISTS `pill_reminders`;
+DROP TABLE IF EXISTS `order_items`;
+DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `prescriptions`;
+DROP TABLE IF EXISTS `medicines`;
+DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `users`;
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- 1. Users Table (Patients & Licensed Pharmacist Admins, Google OAuth)
 CREATE TABLE IF NOT EXISTS `users` (
@@ -43,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 3. Medicine Catalog & Inventory
+-- 3. Medicine Catalog & Dynamic Inventory
 CREATE TABLE IF NOT EXISTS `medicines` (
   `id` VARCHAR(64) NOT NULL,
   `name` VARCHAR(200) NOT NULL,
@@ -55,12 +68,13 @@ CREATE TABLE IF NOT EXISTS `medicines` (
   `cold_chain` BOOLEAN NOT NULL DEFAULT FALSE,
   `stock_quantity` INT NOT NULL DEFAULT 50,
   `min_stock_alert` INT NOT NULL DEFAULT 15,
-  `image_url` TEXT NULL,
+  `image_url` LONGTEXT NULL,
   `dosage_form` VARCHAR(100) NULL,
   `pack_size` VARCHAR(100) NULL,
   `dosage_instructions` TEXT NULL,
   `storage_condition` VARCHAR(100) NULL,
   `ppb_registered` BOOLEAN NOT NULL DEFAULT TRUE,
+  `is_vat_exempt` BOOLEAN NOT NULL DEFAULT TRUE, -- Kenyan VAT Act: human medicines are VAT exempt
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -79,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
   `clinic` VARCHAR(150) NOT NULL,
   `date_issued` DATE NOT NULL,
   `status` ENUM('Verified & Approved', 'Pending Review', 'Dispensed', 'Rejected') NOT NULL DEFAULT 'Verified & Approved',
-  `image_url` TEXT NULL,
+  `image_url` LONGTEXT NULL,
   `notes` TEXT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -89,10 +103,11 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
   CONSTRAINT `fk_rx_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 5. Orders Table (Lipa Na M-Pesa & Card transactions with Live GPS Telemetry)
+-- 5. Orders & POS Transactions Table (Online Delivery & POS Counter Sales with eTIMS)
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` VARCHAR(50) NOT NULL,
   `user_id` VARCHAR(64) NOT NULL,
+  `order_type` ENUM('online_delivery', 'pos_counter') NOT NULL DEFAULT 'online_delivery',
   `customer_name` VARCHAR(150) NOT NULL,
   `customer_phone` VARCHAR(30) NOT NULL,
   `delivery_county` VARCHAR(100) NOT NULL DEFAULT 'Nairobi',
@@ -103,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `subtotal` DECIMAL(10,2) NOT NULL,
   `delivery_fee` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   `total_amount` DECIMAL(10,2) NOT NULL,
-  `payment_method` ENUM('mpesa', 'card', 'cod') NOT NULL DEFAULT 'mpesa',
+  `payment_method` ENUM('mpesa', 'card', 'cod', 'cash', 'insurance') NOT NULL DEFAULT 'mpesa',
   `payment_status` ENUM('pending', 'paid', 'refunded') NOT NULL DEFAULT 'paid',
   `mpesa_code` VARCHAR(50) NULL,
   `tracking_status` ENUM('Order Placed', 'Dispensing & Verified', 'Rider Picked Up', 'Out for Delivery', 'Delivered') NOT NULL DEFAULT 'Out for Delivery',
@@ -115,12 +130,24 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `rider_lng` DECIMAL(10, 7) NOT NULL DEFAULT 36.8120000,
   `cold_chain_temp` VARCHAR(20) NULL DEFAULT '3.8°C',
   `rx_id` VARCHAR(64) NULL,
+  -- eTIMS KRA Tax Electronic Compliance Fields
+  `kra_pin` VARCHAR(30) NULL DEFAULT 'P051289120Z',
+  `etims_invoice_no` VARCHAR(60) NULL,
+  `etims_cu_serial` VARCHAR(60) NULL DEFAULT 'KRAMW0921804',
+  `etims_scdc` VARCHAR(60) NULL,
+  `vat_taxable_amt` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `vat_exempt_amt` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `vat_16_amt` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `cashier_name` VARCHAR(100) NULL DEFAULT 'Pharm. Angela Muthoni',
+  `receipt_qr` TEXT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_orders_user` (`user_id`),
   KEY `idx_orders_status` (`tracking_status`),
   KEY `idx_orders_payment` (`payment_status`),
+  KEY `idx_orders_type` (`order_type`),
+  KEY `idx_orders_created` (`created_at`),
   CONSTRAINT `fk_orders_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -133,6 +160,7 @@ CREATE TABLE IF NOT EXISTS `order_items` (
   `quantity` INT NOT NULL DEFAULT 1,
   `unit_price` DECIMAL(10,2) NOT NULL,
   `subtotal` DECIMAL(10,2) NOT NULL,
+  `tax_code` VARCHAR(10) NOT NULL DEFAULT 'E', -- 'E' = Exempt (medicines), 'A' = 16% VAT (devices/supplies)
   PRIMARY KEY (`id`),
   KEY `idx_order_items_order` (`order_id`),
   KEY `idx_order_items_med` (`medicine_id`),
@@ -155,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `pill_reminders` (
   CONSTRAINT `fk_reminders_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 8. Audit Logs for PPB Pharmacist & System Actions
+-- 8. Audit Logs for PPB Pharmacist & POS Actions
 CREATE TABLE IF NOT EXISTS `admin_logs` (
   `id` INT AUTO_INCREMENT NOT NULL,
   `admin_id` VARCHAR(64) NOT NULL,
